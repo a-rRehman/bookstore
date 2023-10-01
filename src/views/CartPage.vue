@@ -2,6 +2,7 @@
   <v-container>
     <h1 class="mb-5 slider-text">Your Cart</h1>
     <v-row>
+      <!-- Looping Through the list of object with cards -->
       <v-col
         v-for="(cartItem, index) in getCartItems"
         :key="index"
@@ -19,6 +20,7 @@
             </v-div>
           </v-div>
 
+          <!-- Adding counter button to increase and decrease the quantity  -->
           <v-div class="d-flex justify-start align-center ms-3 mt-2">
             <v-btn class="btn-counter" @click="increaseQuantity(index)">
               <v-icon>mdi-plus</v-icon>
@@ -37,6 +39,8 @@
               }}
             </p>
           </v-div>
+
+          <!-- Button to remove the Currrent Book  -->
           <v-card-actions>
             <v-btn
               class="btn-remove ms-2"
@@ -76,6 +80,8 @@ export default {
     return {};
   },
   methods: {
+    // function to increase and decrease the book quantity
+
     increaseQuantity(index) {
       this.getCartItems[index].quantity++;
     },
@@ -84,15 +90,20 @@ export default {
         this.getCartItems[index].quantity--;
       }
     },
+
+    // function to remove book.
     removeItem(index) {
       this.getCartItems.splice(index, 1);
     },
+
+    // function to calculate totel price.
     calculateTotalPrice() {
       return this.getCartItems.reduce(
         (total, cartItem) => total + cartItem.book.price * cartItem.quantity,
         0
       );
     },
+    // function for routing to checkout page.
     proceedToCheckout() {
       this.$router.push("/checkout");
     },
@@ -123,6 +134,6 @@ export default {
 }
 
 .card-zoom:hover {
-  transform: scale(1.05); /* You can adjust the scale factor as needed */
+  transform: scale(1.05);
 }
 </style>

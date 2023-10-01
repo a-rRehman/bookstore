@@ -44,20 +44,22 @@
             ></v-rating>
           </v-card-actions>
           <v-card-actions class="ms-3 d-flex">
-            <router-link to="/bookdetails">
-              <v-btn color="deep-orange-accent-2" variant="outlined">
-                Lets Buy!
-              </v-btn></router-link
+            <v-btn
+              @click="routing"
+              color="deep-orange-accent-2"
+              variant="outlined"
             >
-            <router-link to="/bookdetails">
-              <v-btn
-                class="ms-2 solid-button"
-                color="deep-orange-accent-2"
-                variant="outlined"
-              >
-                Add to Cart!
-              </v-btn></router-link
+              Lets Buy!
+            </v-btn>
+
+            <v-btn
+              @click="routing"
+              class="ms-2 solid-button"
+              color="deep-orange-accent-2"
+              variant="outlined"
             >
+              Add to Cart!
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -77,6 +79,9 @@ export default {
     this.fetchHotSells;
   },
   methods: {
+    routing() {
+      this.$router.push("/bookdetails");
+    },
     toggleWishlist(product) {
       product.wishlist = !product.wishlist;
     },

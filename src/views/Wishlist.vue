@@ -2,6 +2,8 @@
   <v-container>
     <h1 class="mb-5 slider-text">Your Wishlist</h1>
     <v-row>
+      <!-- Looping through Wishlist items list from vuex in card -->
+
       <v-col
         v-for="(wishlistItem, index) in getWishlist"
         :key="index"
@@ -22,7 +24,7 @@
               </v-card-title>
             </v-div>
           </v-div>
-
+          <!-- Button to add product in cart  -->
           <v-div class="d-flex justify-start align-center ms-3 mt-2">
             <v-btn class="btn-counter" @click="addToCart(index)">
               <v-icon>mdi-cart-plus</v-icon>
@@ -36,6 +38,7 @@
           </v-div>
 
           <v-card-actions>
+            <!-- Button to delete product from cart  -->
             <v-btn
               class="btn-remove ms-2"
               @click="removeFromWishlist(index)"
@@ -55,7 +58,8 @@
     </div>
 
     <div class="text-center mt-5">
-      <v-btn @click="proceedToCheckout" class="btn-counter mb-5">
+      <!-- Button to proceed to checkout  -->
+      <v-btn @click="proceedToCartPage" class="btn-counter mb-5">
         Proceed to Cart Page
       </v-btn>
     </div>
@@ -77,20 +81,20 @@ export default {
     return {};
   },
   methods: {
-    addToCart(index) {
-      // Implement logic to add the selected item to the cart
-      // You can use this.wishlist[index] to access the selected item
-    },
+    addToCart(index) {},
+    // function to remove book from wishlist
     removeFromWishlist(index) {
       this.getWishlist.splice(index, 1);
     },
+    // function to get totel of books vailable in wishlist
     calculateTotalPrice() {
       return this.getWishlist.reduce(
         (total, wishlistItem) => total + wishlistItem.book.price,
         0
       );
     },
-    proceedToCheckout() {
+    // function for routing to cart page.
+    proceedToCartPage() {
       this.$router.push("/cartpage");
     },
   },
@@ -98,7 +102,6 @@ export default {
 </script>
 
 <style scoped>
-/* Reuse the same scoped styles for the wishlist page as the cart page */
 .btn-counter {
   background-color: #598c3f;
   color: white;
@@ -121,6 +124,6 @@ export default {
 }
 
 .card-zoom:hover {
-  transform: scale(1.05); /* You can adjust the scale factor as needed */
+  transform: scale(1.05);
 }
 </style>

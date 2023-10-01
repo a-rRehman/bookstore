@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row class="mt-5 mb-5">
+    <v-row class="mb-15">
       <v-col>
         <v-card class="newsletter-card">
           <!-- Background Image -->
@@ -11,6 +11,7 @@
             <v-container>
               <!-- Message Icon -->
               <v-icon class="message-icon" color="primary">mdi-message</v-icon>
+
               <h2 class="headline headline-newletter">
                 Subscribe to Our Newsletter
               </h2>
@@ -46,7 +47,7 @@ export default {
   methods: {
     subscribe() {
       alert(`Subscribed with email: ${this.email}`);
-      // Reset the email field
+
       this.email = "";
     },
   },
@@ -67,7 +68,7 @@ export default {
   background-image: url("../assets/h7_bg.jpg");
   background-size: cover;
   background-position: center;
-  height: 400px; /* Adjust the height as needed */
+  height: 400px;
 }
 
 .newsletter-content {
@@ -96,14 +97,13 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #0000008e; /* Adjust the opacity as needed */
-  z-index: 0; /* Ensure the overlay is on top of the background image */
+  background-color: #0000008e;
+  z-index: 0;
 }
-/* Style for the form elements can be customized further */
 
 .message-icon {
-  font-size: 3rem !important; /* Adjust the icon size as needed */
-  margin-right: 10px; /* Add some spacing between the icon and text */
+  font-size: 3rem !important;
+  margin-right: 10px;
   color: white !important;
   margin-bottom: 20px !important;
 }

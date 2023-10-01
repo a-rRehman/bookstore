@@ -11,6 +11,7 @@
         </h1>
       </v-col>
     </v-row>
+
     <v-row>
       <v-col cols="12" class="text-center">
         <v-text-field
@@ -20,12 +21,13 @@
         ></v-text-field>
       </v-col>
     </v-row>
+
     <v-row>
       <v-col
         v-for="(card, index) in paginatedCards"
         :key="index"
         cols="12"
-        sm="3"
+        sm="4"
       >
         <v-card class="mx-auto pb-2" max-width="344">
           <v-img :src="card.image" height="400px" cover></v-img>
@@ -62,7 +64,7 @@
       </v-col>
     </v-row>
 
-    <!-- Pagination Controls -->
+    <!-- thee paagination cCOntrols -->
     <v-row justify="center" class="mt-3">
       <v-col cols="12" class="text-center">
         <v-pagination
@@ -82,14 +84,14 @@ export default {
     rating: 4,
     searchQuery: "",
     currentPage: 1,
-    itemsPerPage: 3, // Number of items to show per page
+    itemsPerPage: 6,
     cards: [
       {
         image:
           "https://wpbingosite.com/wordpress/bookio/wp-content/webp-express/webp-images/uploads/2018/05/Image-2-480x693.jpg.webp",
         title: "Book 01",
         price: "$18",
-        author: "Gail Gibbons",
+        author: "Harry Potter",
       },
       {
         image:
@@ -97,7 +99,7 @@ export default {
 
         title: "Book 02",
         price: "$22",
-        author: "Gail Gibbons",
+        author: "Harry Potter",
       },
       {
         image:
@@ -105,7 +107,7 @@ export default {
 
         title: "Book 03",
         price: "$18",
-        author: "Gail Gibbons",
+        author: "Harry Potter",
       },
       {
         image:
@@ -113,7 +115,54 @@ export default {
 
         title: "Book 04",
         price: "$24",
-        author: "Gail Gibbons",
+        author: "Harry Potter",
+      },
+      {
+        image:
+          "https://demo2.pavothemes.com/bookory/wp-content/uploads/2022/02/25.jpg",
+        title: "Book 05",
+        price: "$24",
+        author: "Harry Potter",
+      },
+      {
+        image:
+          "https://demo2.pavothemes.com/bookory/wp-content/uploads/2022/02/15.jpg",
+
+        title: "Book 06",
+        price: "$24",
+        author: "Harry Potter",
+      },
+      {
+        image:
+          "https://demo2.pavothemes.com/bookory/wp-content/uploads/2022/02/5.jpg",
+
+        title: "Book 07",
+        price: "$24",
+        author: "Harry Potter",
+      },
+      {
+        image:
+          "https://demo2.pavothemes.com/bookory/wp-content/uploads/2022/02/32.jpg",
+
+        title: "Book 08",
+        price: "$24",
+        author: "Harry Potter",
+      },
+      {
+        image:
+          "https://demo2.pavothemes.com/bookory/wp-content/uploads/2022/02/33.jpg",
+
+        title: "Book 09",
+        price: "$24",
+        author: "Harry Potter",
+      },
+      {
+        image:
+          "https://demo2.pavothemes.com/bookory/wp-content/uploads/2022/02/revslider_book-4.png",
+
+        title: "Book 10",
+        price: "$24",
+        author: "Harry Potter",
       },
     ],
   }),
@@ -123,6 +172,7 @@ export default {
         card.title.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     },
+
     paginatedCards() {
       const startIndex = (this.currentPage - 1) * this.itemsPerPage;
       const endIndex = startIndex + this.itemsPerPage;
@@ -133,9 +183,7 @@ export default {
     },
   },
   methods: {
-    paginate() {
-      // Handle pagination logic if needed
-    },
+    paginate() {},
   },
 };
 </script>

@@ -79,7 +79,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .caro-btn {
   background-color: #125a18;
   font-size: 20px;
@@ -87,14 +87,28 @@ export default {
   border-radius: 500px;
   color: white;
 }
-.slider-text {
-  font-size: 78px !important;
-  font-weight: 600;
-  color: #125a18 !important;
-  letter-spacing: 2px !important;
-  line-height: 90px;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif !important;
+
+@media (max-width: 480px) {
+  .slider-text {
+    font-size: 28px !important;
+    font-weight: 700;
+    color: #125a18 !important;
+    letter-spacing: 2px !important;
+    line-height: 30px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif !important;
+  }
+}
+@media (min-width: 780px) {
+  .slider-text {
+    font-size: 78px !important;
+    font-weight: 600;
+    color: #125a18 !important;
+    letter-spacing: 2px !important;
+    line-height: 90px;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif !important;
+  }
 }
 
 .slider-btn {

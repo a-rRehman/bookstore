@@ -12,8 +12,6 @@
       </v-col>
 
       <v-col md="7" class="d-flex flex-column" style="gap: 10px">
-        <!-- Product Title -->
-
         <h1 class="mb-3" style="font-size: 48px; color: #ff6e40">
           {{ book.title }}
         </h1>
@@ -23,10 +21,9 @@
           color="#ff6e40"
           class="rating"
         ></v-rating>
-        <!-- Product Author -->
+
         <p>By {{ book.author }}</p>
 
-        <!-- Product Counter -->
         <div class="product-counter">
           <p>Quantity: {{ counter }}</p>
           <v-btn color="#ff6e40" @click="incrementCounter">+</v-btn>
@@ -35,22 +32,20 @@
           >
         </div>
 
-        <!-- Product Description -->
         <p>{{ book.description }}</p>
 
-        <!-- Product Price -->
         <h2 style="color: #ff6e40">${{ totelprice }}</h2>
 
-        <!-- Add to Cart Button -->
         <v-btn color="#ff6e40" @click="addToCart">Add to Cart</v-btn>
       </v-col>
     </v-row>
 
     <v-row>
       <h2 class="ms-3 mt-10">Related Products</h2>
-      <HotSells />
     </v-row>
   </v-container>
+
+  <!-- <HotSells /> -->
 </template>
 
 <script>
@@ -63,7 +58,9 @@ export default {
     calculateTotalPrice() {
       this.totelprice = this.counter * this.book.price;
     },
-    addToCart() {},
+    addToCart() {
+      this.$router.push("/cartpage");
+    },
     incrementCounter() {
       this.counter++;
       this.calculateTotalPrice();

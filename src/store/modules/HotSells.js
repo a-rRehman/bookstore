@@ -39,6 +39,41 @@ const actions = {
         author: "xeta",
         wishlist: true,
       },
+      {
+        image:
+          "https://demo2.pavothemes.com/bookory/wp-content/uploads/2022/02/25.jpg",
+        title: "Book 05",
+        price: "$24",
+        author: "Harry Potter",
+        wishlist: true,
+      },
+      {
+        image:
+          "https://demo2.pavothemes.com/bookory/wp-content/uploads/2022/02/15.jpg",
+
+        title: "Book 06",
+        price: "$24",
+        author: "Harry Potter",
+        wishlist: true,
+      },
+      {
+        image:
+          "https://demo2.pavothemes.com/bookory/wp-content/uploads/2022/02/5.jpg",
+
+        title: "Book 07",
+        price: "$24",
+        author: "Harry Potter",
+        wishlist: true,
+      },
+      {
+        image:
+          "https://demo2.pavothemes.com/bookory/wp-content/uploads/2022/02/32.jpg",
+
+        title: "Book 08",
+        price: "$24",
+        author: "Harry Potter",
+        wishlist: true,
+      },
     ];
     commit("setHotSells", cards);
   },

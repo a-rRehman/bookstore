@@ -14,7 +14,7 @@
                 Explore our wide range of fiction books, from classic novels to
                 contemporary bestsellers.
               </p>
-              <v-btn flat class="solid-btn">Browse</v-btn>
+              <v-btn @click="routing" flat class="solid-btn">Browse</v-btn>
             </v-card>
           </div>
         </v-col>
@@ -29,7 +29,9 @@
                 Enhance your knowledge with our educational books covering
                 various subjects and disciplines.
               </p>
-              <v-btn flat class="solid-btn-center">Browse</v-btn>
+              <v-btn @click="routing" flat class="solid-btn-center"
+                >Browse</v-btn
+              >
             </v-card>
           </div>
         </v-col>
@@ -44,7 +46,7 @@
                 Enhance your knowledge with our educational books covering
                 various subjects and disciplines.
               </p>
-              <v-btn flat class="solid-btn">Browse</v-btn>
+              <v-btn @click="routing" flat class="solid-btn">Browse</v-btn>
             </v-card>
           </div>
         </v-col>
@@ -52,6 +54,16 @@
     </v-container>
   </section>
 </template>
+
+<script>
+export default {
+  methods: {
+    routing() {
+      this.$router.push("/bookscatalog");
+    },
+  },
+};
+</script>
 
 <style scoped>
 .category-sections {

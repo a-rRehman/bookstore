@@ -125,8 +125,9 @@ export default {
   methods: {
     ...mapActions("user_module", ["fetchToken"]),
     toLogin() {
-      this.$router.push("/");
+      this.$router.push("/Login");
     },
+
     beforeMount() {
       if (!localStorage.getItem("access_token")) {
         this.$router.push("/");
@@ -140,7 +141,9 @@ export default {
       ) {
         console.log("Cannot Send");
       } else {
-        this.fetchToken(this.signUpData);
+        // this.fetchToken(this.signUpData);
+        this.$router.push("/Login");
+
         // const response = await axios.post(
         //   "http://10.0.10.211:3300/api/register",
         //   {
@@ -165,7 +168,6 @@ export default {
   color: white;
   padding: 25px;
   font-size: 20px;
-  /* border: 1px solid black; */
 }
 .slider-text {
   font-size: 48px !important;
@@ -196,7 +198,7 @@ export default {
 }
 
 .signup-form {
-  border: 1px solid #000 !important; /* Change the border style as needed */
+  border: 1px solid #000 !important;
   padding: 30px;
   padding-top: 10px;
   border-radius: 3px;

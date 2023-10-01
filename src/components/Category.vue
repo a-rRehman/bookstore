@@ -46,7 +46,7 @@ export default {
   methods: {
     subscribe() {
       alert(`Subscribed with email: ${this.email}`);
-      // Reset the email field
+
       this.email = "";
     },
   },

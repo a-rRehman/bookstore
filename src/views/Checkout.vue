@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <!-- Left Side: Order Summary -->
+      <!-- The Left column (orderSummary)  -->
       <v-col cols="12" md="4">
         <h2 class="mb-3 slider-text">Order Summary</h2>
         <v-card class="items-card">
@@ -28,9 +28,9 @@
         </v-card>
       </v-col>
 
-      <!-- Right Side: Shipping Address and Payment Information -->
+      <!-- Right Column Form (PAyment integration)  -->
       <v-col cols="12" md="8">
-        <!-- Shipping Address Form -->
+        <!--The Shipping Address Form -->
         <v-card class="items-card">
           <v-card-title>Shipping Address</v-card-title>
           <v-card-text>
@@ -71,7 +71,7 @@
           </v-card-text>
         </v-card>
 
-        <!-- Payment Information Form -->
+        <!-- The Payment Information Form -->
         <v-card class="items-card mt-3">
           <v-card-title>Payment Information</v-card-title>
           <v-card-text>
@@ -100,7 +100,7 @@
           </v-card-text>
         </v-card>
 
-        <!-- Place Order Button -->
+        <!-- Button to Place Order Button -->
         <div class="text-center mt-5">
           <v-btn @click="submitOrder" class="slider-btn"> Place Order </v-btn>
         </div>

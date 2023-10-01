@@ -30,11 +30,7 @@
           >
           </v-text-field>
 
-          <v-btn
-            type="submit"
-            @click="submitHandlerFetch"
-            block
-            class="mt-2 btn-custom"
+          <v-btn type="submit" @click="routing" block class="mt-2 btn-custom"
             >Submit</v-btn
           >
         </v-form>
@@ -56,6 +52,12 @@
 import axios from "axios";
 export default {
   methods: {
+    toSignUp() {
+      this.$router.push("/signup");
+    },
+    routing() {
+      this.$router.push("/userdashboard/userprofile");
+    },
     async submitHandlerFetch() {
       const response = await axios.post(
         "http://10.0.10.211:3300/api/login",
@@ -132,7 +134,6 @@ export default {
   color: white;
   padding: 25px;
   font-size: 20px;
-  /* border: 1px solid black; */
 }
 
 .btn-custom-guest {
@@ -151,7 +152,7 @@ export default {
 }
 
 .login-form {
-  border: 1px solid #000 !important; /* Change the border style as needed */
+  border: 1px solid #000 !important;
   padding: 30px;
   border-radius: 3px;
   margin-top: 20px;
