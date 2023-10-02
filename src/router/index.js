@@ -26,20 +26,11 @@ const routes = [
         component: () => import("@/views/BooksCatalog.vue"),
       },
       {
-        path: "/bookdetails",
+        path: "/BookDetails",
         name: "BookDetail",
         component: () => import("@/views/BookDetail.vue"),
       },
-      {
-        path: "/Login",
-        name: "Login",
-        component: () => import("@/views/Login.vue"),
-      },
-      {
-        path: "/SignUp",
-        name: "SignUp",
-        component: () => import("@/views/SignUp.vue"),
-      },
+
       {
         path: "/Checkout",
         name: "Checkout",
@@ -58,22 +49,22 @@ const routes = [
           {
             path: "userprofile",
             name: "UserProfile",
-            component: () => import("@/views/UserProfile.vue"), // Create this component
+            component: () => import("@/views/UserProfile.vue"),
           },
           {
             path: "myorders",
             name: "myorders",
-            component: () => import("@/views/MyOrders.vue"), // Create this component
+            component: () => import("@/views/MyOrders.vue"),
           },
           {
             path: "ReviewComponent/::order_id/:productName",
             name: "ReviewComponent",
-            component: () => import("@/views/ReviewComponent.vue"), // Create this component
+            component: () => import("@/views/ReviewComponent.vue"),
           },
           {
             path: "trackorder",
             name: "trackorder",
-            component: () => import("@/views/TrackOrder.vue"), // Create this component
+            component: () => import("@/views/TrackOrder.vue"),
           },
         ],
       },
@@ -95,6 +86,16 @@ const routes = [
         ],
       },
     ],
+  },
+  {
+    path: "/Login",
+    name: "Login",
+    component: () => import("@/views/Login.vue"),
+  },
+  {
+    path: "/SignUp",
+    name: "SignUp",
+    component: () => import("@/views/SignUp.vue"),
   },
 ];
 
