@@ -5,7 +5,7 @@
       <v-col cols="12">
         <v-form class="login-form" fast-fail @submit.prevent>
           <v-text-field
-            v-model="email"
+            v-model="user.email"
             outlined
             dense
             color="blue"
@@ -15,7 +15,7 @@
             class="mt-4 custom-input"
           ></v-text-field>
           <v-text-field
-            v-model="password"
+            v-model="user.password"
             outlined
             dense
             color="blue"
@@ -30,7 +30,11 @@
           >
           </v-text-field>
 
-          <v-btn type="submit" @click="routing" block class="mt-2 btn-custom"
+          <v-btn
+            type="submit"
+            @click="submitHandlerFetch"
+            block
+            class="mt-2 btn-custom"
             >Submit</v-btn
           >
         </v-form>
@@ -49,9 +53,14 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapActions, mapGetters } from "vuex";
 export default {
+  computed: {
+    ...mapGetters("user_module", ["gettoken"]),
+  },
+
   methods: {
+    ...mapActions("user_module", ["fetchLoginData"]),
     toSignUp() {
       this.$router.push("/signup");
     },
@@ -59,26 +68,19 @@ export default {
       this.$router.push("/userdashboard/userprofile");
     },
     async submitHandlerFetch() {
-      const response = await axios.post(
-        "http://10.0.10.211:3300/api/login",
-        {
-          email: this.email,
-          password: this.password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      //  .then((response) => console.log(response.data))
-      //  .catch((err) => console.log(err));
-      console.log(response.data);
+      const tokken = await this.fetchLoginData(this.user);
+      if (tokken.message === "Login successful") {
+        // console.log(this.gettoken);
+        localStorage.setItem("access_token", this.gettoken);
+        this.$router.push("/");
+      }
     },
   },
   data: () => ({
-    password: "",
-    email: "",
+    user: {
+      email: "",
+      password: "",
+    },
     showPassword: false,
     iconColor: "black",
     passwordRules: [

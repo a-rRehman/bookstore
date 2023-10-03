@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-// import book from "./modules/book_module";
+import book_module from "./modules/book_module";
 import boxes from "./modules/boxes_module";
 import HotSells from "./modules/HotSells";
 import user_module from "./modules/user_module";
@@ -14,7 +14,7 @@ export default createStore({
   mutations: {},
   actions: {},
   modules: {
-    // book,
+    book_module,
     boxes,
     HotSells,
     user_module,

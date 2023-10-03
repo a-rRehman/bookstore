@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -45,10 +46,10 @@ export default {
     };
   },
   methods: {
+    ...mapActions("user_module", ["fetchUserSub"]),
+    handleSubmit() {},
     subscribe() {
-      alert(`Subscribed with email: ${this.email}`);
-
-      this.email = "";
+      this.fetchUserSub(this.email);
     },
   },
 };

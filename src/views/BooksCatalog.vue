@@ -30,12 +30,13 @@
         sm="4"
       >
         <v-card class="mx-auto pb-2" max-width="344">
-          <v-img :src="card.image" height="400px" cover></v-img>
+          <v-img :src="card.cover_image_url" height="400px" cover></v-img>
           <v-div class="d-flex">
             <v-div class="ma-1 me-auto">
               <v-card-title>
                 {{ card.title }}
               </v-card-title>
+              <v-card-title> ${{ card.price }} </v-card-title>
             </v-div>
           </v-div>
           <v-card-actions>
@@ -46,11 +47,13 @@
             ></v-rating>
           </v-card-actions>
           <v-card-actions class="ms-3 d-flex">
-            <router-link to="/bookdetails">
-              <v-btn color="deep-orange-accent-2" variant="outlined"
-                >Let's Buy!</v-btn
-              >
-            </router-link>
+            <v-btn
+              @click="singleProduct(card.id)"
+              color="deep-orange-accent-2"
+              variant="outlined"
+              >Let's Buy!</v-btn
+            >
+
             <router-link to="/bookdetails">
               <v-btn
                 class="ms-2 solid-button"
@@ -79,94 +82,17 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
   data: () => ({
     rating: 4,
     searchQuery: "",
     currentPage: 1,
     itemsPerPage: 6,
-    cards: [
-      {
-        image:
-          "https://wpbingosite.com/wordpress/bookio/wp-content/webp-express/webp-images/uploads/2018/05/Image-2-480x693.jpg.webp",
-        title: "Book 01",
-        price: "$18",
-        author: "Harry Potter",
-      },
-      {
-        image:
-          "https://wpbingosite.com/wordpress/bookio/wp-content/webp-express/webp-images/uploads/2018/05/Image-26-480x693.jpg.webp",
-
-        title: "Book 02",
-        price: "$22",
-        author: "Harry Potter",
-      },
-      {
-        image:
-          "https://wpbingosite.com/wordpress/bookio/wp-content/webp-express/webp-images/uploads/2018/05/Image-28-480x693.jpg.webp",
-
-        title: "Book 03",
-        price: "$18",
-        author: "Harry Potter",
-      },
-      {
-        image:
-          "https://wpbingosite.com/wordpress/bookio/wp-content/webp-express/webp-images/uploads/2018/05/Image-72-480x693.jpg.webp",
-
-        title: "Book 04",
-        price: "$24",
-        author: "Harry Potter",
-      },
-      {
-        image:
-          "https://demo2.pavothemes.com/bookory/wp-content/uploads/2022/02/25.jpg",
-        title: "Book 05",
-        price: "$24",
-        author: "Harry Potter",
-      },
-      {
-        image:
-          "https://demo2.pavothemes.com/bookory/wp-content/uploads/2022/02/15.jpg",
-
-        title: "Book 06",
-        price: "$24",
-        author: "Harry Potter",
-      },
-      {
-        image:
-          "https://demo2.pavothemes.com/bookory/wp-content/uploads/2022/02/5.jpg",
-
-        title: "Book 07",
-        price: "$24",
-        author: "Harry Potter",
-      },
-      {
-        image:
-          "https://demo2.pavothemes.com/bookory/wp-content/uploads/2022/02/32.jpg",
-
-        title: "Book 08",
-        price: "$24",
-        author: "Harry Potter",
-      },
-      {
-        image:
-          "https://demo2.pavothemes.com/bookory/wp-content/uploads/2022/02/33.jpg",
-
-        title: "Book 09",
-        price: "$24",
-        author: "Harry Potter",
-      },
-      {
-        image:
-          "https://demo2.pavothemes.com/bookory/wp-content/uploads/2022/02/revslider_book-4.png",
-
-        title: "Book 10",
-        price: "$24",
-        author: "Harry Potter",
-      },
-    ],
+    cards: [],
   }),
   computed: {
+    ...mapGetters("book_module", ["getBooksList"]),
     filteredCards() {
       return this.cards.filter((card) =>
         card.title.toLowerCase().includes(this.searchQuery.toLowerCase())
@@ -183,7 +109,19 @@ export default {
     },
   },
   methods: {
+    singleProduct(id) {
+      this.$router.push({
+        name: "BookDetail",
+        params: { id: id },
+      });
+    },
+    ...mapActions("book_module", ["fetchAllBook"]),
     paginate() {},
+  },
+  async beforeMount() {
+    const bookList = await this.fetchAllBook();
+    this.cards = bookList;
+    console.log(bookList);
   },
 };
 </script>

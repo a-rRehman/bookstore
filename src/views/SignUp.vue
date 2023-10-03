@@ -123,7 +123,7 @@ export default {
   },
 
   methods: {
-    ...mapActions("user_module", ["fetchToken"]),
+    ...mapActions("user_module", ["fetchRegData"]),
     toLogin() {
       this.$router.push("/Login");
     },
@@ -141,21 +141,7 @@ export default {
       ) {
         console.log("Cannot Send");
       } else {
-        // this.fetchToken(this.signUpData);
-        this.$router.push("/Login");
-
-        // const response = await axios.post(
-        //   "http://10.0.10.211:3300/api/register",
-        //   {
-        //     name: this.signUpData.username,
-        //     email: this.signUpData.email,
-        //     password: this.signUpData.password,
-        //   },
-        //   {
-        //     headers: { "Content-Type": "application/json" },
-        //   }
-        // );
-        // console.log(response.data);
+        this.fetchRegData(this.signUpData);
       }
     },
   },

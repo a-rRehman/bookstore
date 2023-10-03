@@ -49,12 +49,22 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 import HotSells from "@/components/HotSells.vue";
 export default {
+  computed: {
+    // ...mapGetters("book_module", ["fetchSingleBook"]),
+    ...mapGetters("book_module", ["getSingleBook"]),
+  },
+  beforeMount() {
+    // console.log(this.fetchSingleBook());
+    console.log(this.GetSingleBook());
+  },
   components: {
     HotSells,
   },
   methods: {
+    ...mapActions("book_module", ["fetchSingleBook"]),
     calculateTotalPrice() {
       this.totelprice = this.counter * this.book.price;
     },
@@ -72,10 +82,15 @@ export default {
       }
     },
   },
+  mounted() {
+    this.id = this.$route.params.id;
+    console.log(this.id);
+  },
   data() {
     return {
       rating: 4,
       counter: 1,
+      id: 0,
       book: {
         title: "Empty Roads",
         author: "Sherlock Holmes",

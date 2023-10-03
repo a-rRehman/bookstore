@@ -1,30 +1,41 @@
-// import ApiServices from "@/services/api";
+import ApiServices from "@/services/api";
 
-// const state = {
-//   dummyList: [],
-// };
+const state = {
+  BooksList: [],
+  SingleBook: [],
+};
 
-// const getters = {
-//   getDummyData: (state) => state.dummyList,
-// };
+const getters = {
+  getBooksList: (state) => state.BooksList,
+  getSingleBook: (state) => state.SingleBook,
+};
 
-// const mutations = {
-//   setDummyData(state, dummyList) {
-//     state.dummyList = dummyList;
-//   },
-// };
+const mutations = {
+  setBooksList(state, BooksList) {
+    state.BooksList = BooksList;
+  },
+  setSingleBook(state, SingleBook) {
+    state.SingleBook = SingleBook;
+  },
+};
 
-// const actions = {
-//   async fetchDummy({ commit }) {
-//     const data = await ApiServices.getAllProducts();
-//     commit("setDummyData", data.products);
-//   },
-// };
+const actions = {
+  async fetchAllBook({ commit }) {
+    const res = await ApiServices.getAllproducts();
+    return res;
+  },
 
-// export default {
-//   namespaced: true,
-//   state,
-//   getters,
-//   actions,
-//   mutations,
-// };
+  async fetchSingleBook({ commit }, id) {
+    const res = await ApiServices.getSingleProducts(id);
+    commit("setSingleBook", res.data);
+    return res;
+  },
+};
+
+export default {
+  namespaced: true,
+  state,
+  getters,
+  actions,
+  mutations,
+};
