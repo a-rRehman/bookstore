@@ -32,10 +32,12 @@
                 IN ASIA
               </h2>
               <!-- Add a button -->
-              <router-link to="/products" class="text-decoration-none">
+              <router-link to="/bookscatalog" class="text-decoration-none">
                 <v-btn class="mt-8 slider-btn" color="black">
                   Meet Our Best Seller
                 </v-btn>
+              </router-link>
+              <router-link to="/bookscatalog" class="text-decoration-none">
                 <v-btn class="mt-8 ms-3 slider-btn2" color="black">
                   Lets Explore
                 </v-btn>

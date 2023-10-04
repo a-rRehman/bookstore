@@ -54,12 +54,14 @@
           @click:append="showConfirmPassword = !showConfirmPassword"
         >
         </v-text-field>
-        <v-btn
-          type="submit"
-          @click="submitHandler"
-          block
-          class="mt-2 btn-custom"
-          >Submit</v-btn
+        <router-link to="/Login">
+          <v-btn
+            type="submit"
+            @click="submitHandler"
+            block
+            class="mt-2 btn-custom"
+            >Submit</v-btn
+          ></router-link
         >
       </v-form>
     </v-sheet>
@@ -128,11 +130,11 @@ export default {
       this.$router.push("/Login");
     },
 
-    beforeMount() {
-      if (!localStorage.getItem("access_token")) {
-        this.$router.push("/");
-      }
-    },
+    // beforeMount() {
+    //   if (!localStorage.getItem("access_token")) {
+    //     this.$router.push("/");
+    //   }
+    // },
     async submitHandler() {
       if (
         !this.signUpData.email ||
@@ -141,6 +143,7 @@ export default {
       ) {
         console.log("Cannot Send");
       } else {
+        // this.$router.push("/login");
         this.fetchRegData(this.signUpData);
       }
     },

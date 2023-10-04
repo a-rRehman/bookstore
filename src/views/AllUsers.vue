@@ -9,8 +9,12 @@
         ><h3>UserEmail :</h3>
         {{ user.email }}</v-card-title
       >
+      <v-card-title
+        ><h3>Subscription Status :</h3>
+        {{ user.subscription }}</v-card-title
+      >
       <v-card-action>
-        <v-btn @click="removefun(index)" class="btn-remove ms-4 mb-4"
+        <v-btn @click="removefun(user)" class="btn-remove ms-4 mb-4"
           >Remove</v-btn
         >
       </v-card-action>
@@ -18,33 +22,31 @@
   </div>
 </template>
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      UserList: [
-        {
-          name: "AbdurRehman",
-          email: "arj00789@gmail.com",
-        },
-        {
-          name: "Musa",
-          email: "musa@gmail.com",
-        },
-        {
-          name: "Mustafa",
-          email: "mustafa@gmail.com",
-        },
-        {
-          name: "Usama",
-          email: "usama@gmail.com",
-        },
-      ],
+      UserList: [],
     };
   },
   methods: {
-    removefun(index) {
-      this.UserList.splice(index, 1);
+    ...mapActions("user_module", ["fetchShowAllUsers"]),
+    ...mapActions("user_module", ["fetchDeleteUsers"]),
+
+    async removefun(user) {
+      const response = await this.fetchDeleteUsers(user.id);
+      const res = await this.fetchShowAllUsers();
+      this.UserList = res;
     },
+    // removefun(index) {
+    //   this.UserList.splice(index, 1);
+    // },
+  },
+
+  async beforeMount() {
+    const response = await this.fetchShowAllUsers();
+    this.UserList = response;
+    console.log(response);
   },
 };
 </script>

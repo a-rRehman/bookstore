@@ -12,9 +12,14 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col v-for="(card, index) in getHotSells" :key="index" cols="12" sm="3">
+      <v-col
+        v-for="(card, index) in this.Book.slice(0, 4)"
+        :key="index"
+        cols="12"
+        sm="3"
+      >
         <v-card class="mx-auto pb-2 card-zoom" max-width="344">
-          <v-img :src="card.image" height="400px" cover></v-img>
+          <v-img :src="card.cover_image_url" height="400px" cover></v-img>
           <v-div class="d-flex ms-1 me-3 align-center justify-space-between">
             <v-div class=""
               ><v-card-title style="font-weight: 700">
@@ -45,7 +50,7 @@
           </v-card-actions>
           <v-card-actions class="ms-3 d-flex">
             <v-btn
-              @click="routing"
+              @click="singleProduct(card.id)"
               color="deep-orange-accent-2"
               variant="outlined"
             >
@@ -53,7 +58,7 @@
             </v-btn>
 
             <v-btn
-              @click="routing"
+              @click="singleProduct(card.id)"
               class="ms-2 solid-button"
               color="deep-orange-accent-2"
               variant="outlined"
@@ -72,15 +77,29 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters("HotSells", ["getHotSells"]),
-    ...mapActions("HotSells", ["fetchHotSells"]),
+    ...mapGetters("book_module", ["getBooksList"]),
+
+    // ...mapGetters("HotSells", ["getHotSells"]),
+    // ...mapActions("HotSells", ["fetchHotSells"]),
   },
-  mounted() {
-    this.fetchHotSells;
+  // mounted() {
+  //   this.fetchHotSells;
+  // },
+
+  async beforeMount() {
+    const bookList = await this.fetchAllBook();
+    this.Book = bookList;
   },
   methods: {
+    ...mapActions("book_module", ["fetchAllBook"]),
     routing() {
       this.$router.push("/bookdetails");
+    },
+    singleProduct(id) {
+      this.$router.push({
+        name: "BookDetail",
+        params: { id: id },
+      });
     },
     toggleWishlist(product) {
       product.wishlist = !product.wishlist;
@@ -88,6 +107,7 @@ export default {
   },
 
   data: () => ({
+    Book: [],
     // wishlistIcon: false,
     rating: 4,
     icontoggle: true,

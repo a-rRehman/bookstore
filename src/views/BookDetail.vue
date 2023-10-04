@@ -3,7 +3,7 @@
     <v-row class="mt-5">
       <v-col md="5">
         <v-img
-          src="https://wpbingosite.com/wordpress/bookio/wp-content/webp-express/webp-images/uploads/2018/05/Image-26-480x693.jpg.webp"
+          :src="book.cover_image_url"
           height="500"
           width="500"
           class="product-image"
@@ -34,7 +34,7 @@
 
         <p>{{ book.description }}</p>
 
-        <h2 style="color: #ff6e40">${{ totelprice }}</h2>
+        <h2 style="color: #ff6e40">${{ book.price * this.quantity }}</h2>
 
         <v-btn color="#ff6e40" @click="addToCart">Add to Cart</v-btn>
       </v-col>
@@ -44,81 +44,62 @@
       <h2 class="ms-3 mt-10">Related Products</h2>
     </v-row>
   </v-container>
-
-  <!-- <HotSells /> -->
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import HotSells from "@/components/HotSells.vue";
+
 export default {
-  computed: {
-    // ...mapGetters("book_module", ["fetchSingleBook"]),
-    ...mapGetters("book_module", ["getSingleBook"]),
-  },
-  beforeMount() {
-    // console.log(this.fetchSingleBook());
-    console.log(this.GetSingleBook());
-  },
-  components: {
-    HotSells,
-  },
+  computed: {},
+
   methods: {
     ...mapActions("book_module", ["fetchSingleBook"]),
-    calculateTotalPrice() {
-      this.totelprice = this.counter * this.book.price;
-    },
+    ...mapActions("book_module", ["fetchAddCart"]),
     addToCart() {
       this.$router.push("/cartpage");
     },
     incrementCounter() {
       this.counter++;
-      this.calculateTotalPrice();
+      this.quantity++;
     },
     decrementCounter() {
       if (this.counter > 1) {
         this.counter--;
-        this.calculateTotalPrice();
+        this.quantity--;
       }
     },
+
+    async addToCart() {
+      this.item.user_id = localStorage.getItem("user_id");
+      this.item.book_id = this.book.id;
+      this.item.quantity = this.quantity;
+      this.item.price = this.book.price;
+      console.log(this.item);
+      const res = await this.fetchAddCart(this.item);
+      console.log(res.message);
+    },
   },
-  mounted() {
+
+  async beforeMount() {
     this.id = this.$route.params.id;
-    console.log(this.id);
+    const response = await this.fetchSingleBook(this.id);
+    this.book = response;
+    console.log(response);
   },
+
   data() {
     return {
+      item: {
+        user_id: "",
+        book_id: "",
+        quantity: "",
+        price: "",
+      },
+      quantity: 1,
       rating: 4,
       counter: 1,
       id: 0,
-      book: {
-        title: "Empty Roads",
-        author: "Sherlock Holmes",
-        price: 25,
-        description:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam possimus eligendi perferendis, eum maxime delectus nihil repellat temporibus accusamus molestiae laborum sunt corrupti ipsam qui ea, quidem at minus iusto?",
-        coverImage: "https://via.placeholder.com/400x600",
-        reviews: [
-          { title: "Great book!", rating: 5, comment: "I loved it!" },
-          { title: "Good read", rating: 4, comment: "Enjoyable." },
-        ],
-        relatedBooks: [
-          {
-            id: 1,
-            title: "Related Book 1",
-            author: "Related Author 1",
-            coverImage: "https://via.placeholder.com/200x300",
-          },
-          {
-            id: 2,
-            title: "Related Book 2",
-            author: "Related Author 2",
-            coverImage: "https://via.placeholder.com/200x300",
-          },
-        ],
-      },
-      // totelprice: this.book.price,
-      totelprice: 25,
+      book: [],
     };
   },
 };

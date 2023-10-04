@@ -1,11 +1,14 @@
 <template>
   <div class="container mb-5">
-    <div v-for="order in orderList" :key="order.OrderId">
+    <div v-for="order in orderList" :key="order.id">
       <div i class="card">
         <h4>
-          Product Name : <span class="paragraph">{{ order.ProductName }}</span>
+          Order-Id : <span class="paragraph">{{ order.id }}</span>
         </h4>
         <h4>
+          Status : <span class="paragraph">{{ order.status }}</span>
+        </h4>
+        <!-- <h4>
           Product Id :<span class="paragraph">{{ order.OrderId }}</span>
         </h4>
         <h4>
@@ -13,7 +16,7 @@
         </h4>
         <h4>
           Product Status :<span class="paragraph">{{ order.status }}</span>
-        </h4>
+        </h4> -->
         <VBtn
           flat
           class="review-btn"
@@ -26,44 +29,21 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      orderList: [
-        {
-          OrderId: 1,
-          ProductName: "Product01",
-          Quantity: 5,
-          status: "Completed",
-        },
-        {
-          OrderId: 2,
-          ProductName: "Product02",
-          Quantity: 5,
-          status: "Shipped",
-        },
-        {
-          OrderId: 3,
-          ProductName: "Product01",
-          Quantity: 5,
-          status: "To be Shipped",
-        },
-        {
-          OrderId: 1,
-          ProductName: "Product01",
-          Quantity: 5,
-          status: "Completed",
-        },
-        {
-          OrderId: 1,
-          ProductName: "Product01",
-          Quantity: 5,
-          status: "Shipped",
-        },
-      ],
+      orderList: [],
     };
   },
+  async beforeMount() {
+    const response = await this.fetchShowAllUsersOrders();
+    this.orderList = response;
+    console.log(response);
+  },
+
   methods: {
+    ...mapActions("user_module", ["fetchShowAllUsersOrders"]),
     reviewHandler(id, name) {
       this.$router.push({
         name: "ReviewComponent",

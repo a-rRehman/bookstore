@@ -26,7 +26,7 @@ const routes = [
         component: () => import("@/views/BooksCatalog.vue"),
       },
       {
-        path: "/BookDetails/:id",
+        path: "/bookdetail/:id",
         name: "BookDetail",
         component: () => import("@/views/BookDetail.vue"),
         props: true,
@@ -83,6 +83,16 @@ const routes = [
             path: "allusers",
             name: "allusers",
             component: () => import("@/views/AllUsers.vue"), // Create this component
+          },
+          {
+            path: "AddBook",
+            name: "AddBook",
+            component: () => import("@/views/AddBook.vue"), // Create this component
+          },
+          {
+            path: "alladminbooks",
+            name: "alladminbooks",
+            component: () => import("@/views/alladminbooks.vue"), // Create this component
           },
         ],
       },

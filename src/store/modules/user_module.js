@@ -47,6 +47,38 @@ const actions = {
     const res = await ApiServices.user_editprofile(token, updateduser);
     console.log(res);
   },
+
+  //all User own orders
+  async fetchShowuserOrders({ commit }) {
+    const token = localStorage.getItem("access_token");
+    const user_id = localStorage.getItem("user_id");
+    const res = await ApiServices.showUserOrder(token, user_id);
+    return res;
+  },
+
+  //admin side working
+
+  //all All Users orders
+  async fetchShowAllUsersOrders({ commit }) {
+    const token = localStorage.getItem("access_token");
+    const res = await ApiServices.showAllUsersOrder(token);
+    return res;
+  },
+
+  //All Users orders
+  async fetchShowAllUsers({ commit }) {
+    const token = localStorage.getItem("access_token");
+    const res = await ApiServices.showAllUsers(token);
+    return res;
+  },
+
+  //Delete User
+  async fetchDeleteUsers({ commit }, userId) {
+    const token = localStorage.getItem("access_token");
+
+    const res = await ApiServices.DeleteUsers(token, userId);
+    return res;
+  },
 };
 
 export default {

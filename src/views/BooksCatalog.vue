@@ -51,17 +51,17 @@
               @click="singleProduct(card.id)"
               color="deep-orange-accent-2"
               variant="outlined"
-              >Let's Buy!</v-btn
+              >Let's Buy!!!!!</v-btn
             >
 
-            <router-link to="/bookdetails">
+            <!-- <router-link to="`/bookdetails/${}`">
               <v-btn
                 class="ms-2 solid-button"
                 color="deep-orange-accent-2"
                 variant="outlined"
                 >Add to Cart!</v-btn
               >
-            </router-link>
+            </router-link> -->
           </v-card-actions>
         </v-card>
       </v-col>

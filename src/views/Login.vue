@@ -69,9 +69,11 @@ export default {
     },
     async submitHandlerFetch() {
       const tokken = await this.fetchLoginData(this.user);
+      console.log(tokken);
       if (tokken.message === "Login successful") {
         // console.log(this.gettoken);
         localStorage.setItem("access_token", this.gettoken);
+        localStorage.setItem("user_id", tokken.user_id);
         this.$router.push("/");
       }
     },

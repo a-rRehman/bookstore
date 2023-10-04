@@ -15,9 +15,16 @@
       />
       <VListItem
         prepend-icon="mdi-account-group"
-        value="Track Order"
-        title="Track Order"
-        @click="trackOrder"
+        value="Add Book"
+        title="Add Book"
+        @click="addBook"
+      />
+
+      <VListItem
+        prepend-icon="mdi-account-group"
+        value="All Books "
+        title="All Books"
+        @click="allBook"
       />
     </VList>
   </VNavigationDrawer>
@@ -29,11 +36,14 @@ export default {
     manageProfile() {
       this.$router.push("/admindashboard/allusers");
     },
-    trackOrder() {
-      this.$router.push("/admindashboard/allorders");
+    addBook() {
+      this.$router.push("/admindashboard/addBook");
     },
     myOrders() {
       this.$router.push("/admindashboard/allorders");
+    },
+    allBook() {
+      this.$router.push("/admindashboard/alladminbooks");
     },
   },
 };
