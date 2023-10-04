@@ -1,71 +1,107 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col
-        v-for="(book, index) in newbook"
-        :key="index"
-        cols="12"
-        sm="6"
-        md="4"
-        lg="3"
-      >
-        <v-card>
-          <v-img :src="book.cover_image_url" height="200"></v-img>
-          <v-card-title class="primary-color white--text">{{
-            book.title
-          }}</v-card-title>
-          <v-card-subtitle>{{ book.author }}</v-card-subtitle>
-          <v-card-text>{{ book.description }}</v-card-text>
-          <v-card-actions>
-            <v-btn color="error" @click="deleteBook(index)">Delete</v-btn>
-            <v-btn color="primary" @click="openUpdateDialog(index)"
-              >Update</v-btn
-            >
-          </v-card-actions>
-        </v-card>
+    <v-row justify="center" class="mt-5 mb-5">
+      <v-col cols="12" class="text-center">
+        <h1 class="slider-text">
+          All
+          <span style="color: #ff6d40ef; text-decoration: underline"
+            >Products</span
+          >
+          PRODUCTS
+        </h1>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col
+        v-for="(card, index) in this.newBook"
+        :key="index"
+        cols="12"
+        sm="3"
+      >
+        <v-card class="mx-auto pb-2 card-zoom" max-width="344">
+          <v-img :src="card.cover_image_url" height="400px" cover></v-img>
+          <v-div class="d-flex ms-1 me-3 align-center justify-space-between">
+            <v-div class=""
+              ><v-card-title style="font-weight: 700">
+                {{ card.title }}
+              </v-card-title>
+            </v-div>
+          </v-div>
+          <v-div class="d-flex">
+            <v-div class="ma-3 me-auto"
+              ><v-card-price class="font-weight-bold text-green ms-1">
+                Price: {{ card.price }} </v-card-price
+              ><br />
+              <v-card-price class="font-weight-bold text-green ms-1">
+                Author: {{ card.author }}
+              </v-card-price>
+            </v-div>
 
-    <!-- Update Book Dialog -->
-    <v-dialog v-model="updateDialog" max-width="500">
-      <v-card>
-        <v-card-title class="primary-color white--text"
-          >Update Book</v-card-title
-        >
-        <v-card-text>
-          <v-form @submit.prevent="updateBook">
-            <v-text-field
-              v-model="editedBook.title"
-              label="Title"
-              required
-            ></v-text-field>
-            <v-text-field
-              v-model="editedBook.author"
-              label="Author"
-              required
-            ></v-text-field>
-            <v-text-field
-              v-model="editedBook.cover_image_url"
-              label="Cover Image URL"
-              required
-            ></v-text-field>
-            <v-text-field
-              v-model="editedBook.price"
-              label="Price"
-              required
-              type="number"
-              step="0.01"
-            ></v-text-field>
-            <v-textarea
-              v-model="editedBook.description"
-              label="Description"
-              required
-            ></v-textarea>
-            <v-btn color="primary" type="submit">Update</v-btn>
-          </v-form>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
+            <v-div class="ma-4"></v-div>
+          </v-div>
+
+          <v-card-actions class="ms-3 d-flex">
+            <v-btn
+              @click="openUpdateDialog(card)"
+              color="deep-orange-accent-2"
+              variant="outlined"
+            >
+              Update
+            </v-btn>
+
+            <v-btn
+              @click="deleteBook(card.id)"
+              class="ms-2 solid-button"
+              color="deep-orange-accent-2"
+              variant="outlined"
+            >
+              Delete
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+
+        <!-- Update Book Dialog -->
+        <v-dialog v-model="updateDialog" max-width="500">
+          <v-card>
+            <v-card-title class="primary-color white--text"
+              >Update Book</v-card-title
+            >
+            <v-card-text>
+              <v-form @submit.prevent="updateBook">
+                <v-text-field
+                  v-model="editedBook.title"
+                  label="Title"
+                  required
+                ></v-text-field>
+                <v-text-field
+                  v-model="editedBook.author"
+                  label="Author"
+                  required
+                ></v-text-field>
+                <v-text-field
+                  v-model="editedBook.cover_image_url"
+                  label="Cover Image URL"
+                  required
+                ></v-text-field>
+                <v-text-field
+                  v-model="editedBook.price"
+                  label="Price"
+                  required
+                  type="number"
+                  step="0.01"
+                ></v-text-field>
+                <v-textarea
+                  v-model="editedBook.description"
+                  label="Description"
+                  required
+                ></v-textarea>
+                <v-btn color="primary" type="submit">Update</v-btn>
+              </v-form>
+            </v-card-text>
+          </v-card>
+        </v-dialog>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -77,63 +113,45 @@ export default {
   },
   data() {
     return {
-      books: [
-        // Sample data - replace with actual book data from your database
-        {
-          title: "Book 1",
-          author: "Author 1",
-          cover_image_url: "https://via.placeholder.com/150",
-          price: 19.99,
-          description: "Description of Book 1",
-        },
-        {
-          title: "Book 2",
-          author: "Author 2",
-          cover_image_url: "https://via.placeholder.com/150",
-          price: 24.99,
-          description: "Description of Book 2",
-        },
-        // Add more book objects as needed
-      ],
-      editedBook: {
-        title: "",
-        author: "",
-        cover_image_url: "",
-        price: null,
-        description: "",
-      },
-      updateDialog: false,
-      selectedIndex: -1,
       newBook: [],
+      books: [],
+      editedBook: {},
+      updateDialog: false,
     };
   },
-  async mounted() {
-    const response = await this.fetchAllBook();
-    this.newBook = response;
+
+  async beforeMount() {
+    const bookList = await this.fetchAllBook();
+    this.newBook = bookList;
   },
 
   methods: {
     ...mapActions("book_module", ["fetchAllBook"]),
-    deleteBook(index) {
-      this.books.splice(index, 1);
+    ...mapActions("book_module", ["fetchDeleteBook"]),
+    ...mapActions("book_module", ["fetchUpdatedBook"]),
+
+    async deleteBook(id) {
+      const response = await this.fetchDeleteBook(id);
+      console.log(response);
+
+      const bookList = await this.fetchAllBook();
+      this.newBook = bookList;
     },
-    openUpdateDialog(index) {
-      this.selectedIndex = index;
-      this.editedBook = { ...this.books[index] };
+
+    openUpdateDialog(book) {
+      this.editedBook = book;
       this.updateDialog = true;
     },
-    updateBook() {
-      if (this.selectedIndex >= 0) {
-        this.books.splice(this.selectedIndex, 1, { ...this.editedBook });
-        this.updateDialog = false;
-        this.editedBook = {
-          title: "",
-          author: "",
-          cover_image_url: "",
-          price: null,
-          description: "",
-        };
-      }
+
+    async updateBook() {
+      // console.log(this.editedBook);
+      const response = await this.fetchUpdatedBook(this.editedBook);
+      console.log(response);
+
+      // const bookList = await this.fetchAllBook();
+      // this.newBook = bookList;
+
+      this.updateDialog = false;
     },
   },
 };

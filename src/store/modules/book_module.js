@@ -88,6 +88,21 @@ const actions = {
     const res = await ApiServices.AddBook(token, add_book);
     return res;
   },
+
+  //dleete book
+  async fetchDeleteBook({ commit }, Book_id) {
+    const token = localStorage.getItem("access_token");
+    const res = await ApiServices.removeBook(token, Book_id);
+    return res;
+  },
+
+  //update book
+  async fetchUpdatedBook({ commit }, update_book) {
+    // console.log(update_book);
+    const token = localStorage.getItem("access_token");
+    const res = await ApiServices.updateBook(token, update_book);
+    return res;
+  },
 };
 export default {
   namespaced: true,

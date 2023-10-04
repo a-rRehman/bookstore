@@ -316,7 +316,44 @@ const ApiServices = {
 
     return response.data;
   },
+
+  async removeBook(token, book_id) {
+    const response = await axios.delete(`${BASE_URL}/deletebooks/${book_id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.data;
+    return data;
+  },
+
+  //   Update books API: (only Admin)
+  // Method: put
+  // Endpoint:http://10.0.10.211:3300/api/updatebooks/{book_id}
+  // Endpoint: Input: title, author, cover_image_url, price, description
+
+  //update Book Api
+
+  async updateBook(token, update_book) {
+    const response = await axios.put(
+      `${BASE_URL}/updatebooks/${update_book.id}`,
+      {
+        title: update_book.title,
+        author: update_book.author,
+        cover_image_url: update_book.cover_image_url,
+        price: update_book.price,
+        description: update_book.description,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response;
+  },
 };
 
-// http://10.0.10.211:3300/api/users/{user_id}
 export default ApiServices;
